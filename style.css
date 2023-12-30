@@ -2,18 +2,65 @@ body {
     background-color: blanchedalmond;
     text-align: center;
 }
-section.board {
-    display: flex;
-    justify-content: center;
+h1 {
+    font-size: 70px;
+    color: #4e616f;
+}
+#board {
+    margin: 0 auto;
     display: grid;
-    grid-gap: 5px;
-    grid-template-columns: 100px 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px 100px;
+    justify-content: center;
+    align-content: center;
+    width: 610px;
+    height: 610px;
+    background-color: #d7e1e7;
+    border-radius: 10px;
+    grid-gap: 10px;
+    grid-template-columns: 140px 140px 140px 140px;
+    grid-template-rows: 140px 140px 140px 140px;
 
 }
-div.grid {
-    background-color: rgb(226, 170, 170);
+.grid {
+    background-color: #c1cac8;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.num2{
+    background-color: rgb(188, 235, 255);
+}
+.num4{
+    background-color: rgb(164, 228, 255);
+}
+.num8{
+    background-color: rgb(143, 210, 238);
+}
+.num16{
+    background-color: rgb(108, 181, 212);
+}
+.num32{
+    background-color: rgb(66, 155, 193);
+}
+.num64{
+    background-color: rgb(43, 131, 169);
+}
+.num128{
+    background-color: rgb(33, 105, 136);
+}
+.num256{
+    background-color: rgb(33, 105, 136);
+}
+.num512{
+    background-color: rgb(55, 97, 156);
+}
+.num1024{
+    background-color: rgb(30, 66, 117);
+}
+.num2048{
+    background-color: rgb(255, 0, 0);
+    color: #ffffff;
 }
