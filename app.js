@@ -72,10 +72,43 @@ function updateGridStyle(grid, num){
         }
     }
 }
-//shift ev
+
+//remove the index of a row where hold 0.   Ex: [0, 2, 0, 2] - > [2,2]
+function removeZero(row){
+    return row.filter(num => num !=0)
+}
+
+function shift(row){
+    //remove value 0 before shift
+    row = removeZero(row)
+    
+    for(let i = 0; i<row.length; i++){
+        //if the value in current index 
+        //is the same as the next one plus them
+        //[2,2,2] -> [4,0,2]
+        if(row[i] == row[i+1]){
+            row[i] += row[i]
+            //clear the value in next index
+            row[i+1] = 0
+            score +=row[i]
+        }
+    }
+    //remove 0 again after no matter what
+    //if there was nothing add up, 
+    //here is not going to do anything
+    row = removeZero(row)
+
+    //add 0 back to the end after add up
+    while(row.length<4){
+        row.push(0)
+    }
+}
+
+//shift left
 function shiftLeft(){
     for(let i=0; i<rows.length; i++ ){
-        //a temporary array to hold current values in a row before shift
+        //a temporary array to hold current values 
+        //in a row before shift
         let row = board[i]
         //get value after shifted a row 
         row = shift(row)
