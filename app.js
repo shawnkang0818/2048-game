@@ -18,18 +18,22 @@ document.addEventListener('keyup', (evt) => {
     if(evt.code == "ArrowLeft"){
         updateBoardAfterShiftLeft()
         addNumToGrid()
+        soundEffect()
     }
     else if(evt.code == "ArrowRight"){
         updateBoardAfterShiftRight()
         addNumToGrid()
+        soundEffect()
     }
     else if(evt.code == "ArrowUp"){
         updateBoardAfterShiftUp()
         addNumToGrid()
+        soundEffect()
     }
     else if(evt.code == "ArrowDown"){
         updateBoardAfterShiftDown()
         addNumToGrid()
+        soundEffect()
     }
     document.querySelector(".score").textContent = score;
     
@@ -234,4 +238,8 @@ function addNumToGrid(){
             hasNum = true
         }
     }
+}
+function soundEffect(){
+    let audio = new Audio("sound/shift.mp3")
+    audio.play()
 }
