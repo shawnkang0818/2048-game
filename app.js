@@ -105,7 +105,7 @@ function shift(row){
 }
 
 //shift left
-function shiftLeft(){
+function updateBoardAfterShiftLeft(){
     for(let i=0; i<rows.length; i++ ){
         //a temporary array to hold current values 
         //in a row before shift
