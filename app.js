@@ -16,7 +16,11 @@ let idx = 0
 /*------------------------ Cached Element References ------------------------*/
 const gridEls = document.querySelectorAll(".grid")
 /*----------------------------- Event Listeners -----------------------------*/
-
+document.addEventListener("keyup", (evt) => {
+    if(evt.code == "AroowLeft"){
+        shiftLeft()
+    }
+})
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -29,16 +33,22 @@ window.onload = function(){
 
 function init(){
     board = [
-        [2, 0, 0, 0],
+        [0, 2, 0, 0],
         [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
+        [0, 0, 16, 0],
+        [0, 2048, 0, 0]
     ]
+    // board = [
+    //     [0, 0, 0, 0],
+    //     [0, 0, 0, 0],
+    //     [0, 0, 0, 0],
+    //     [0, 0, 0, 0]
+    // ]
     //iteral the board to update the grid data 
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < colmns; c++) {
-            let num = board[r][c];
-            let grid = document.querySelector(`#g${r}${c}`)
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < colmns; j++) {
+            let num = board[i][j];
+            let grid = document.querySelector(`#g${i}${j}`)
             updateGridStyle(grid, num);
         }
     }
@@ -48,7 +58,7 @@ function init(){
 function updateGridStyle(grid, num){
     //clear the value of grid
     grid.innertext = ""
-    //clear the class list of grid
+    //clear the class list of grid(clear style)
     grid.classList.value = ""
     //add grid back
     grid.classList.add("grid")
@@ -60,5 +70,16 @@ function updateGridStyle(grid, num){
         else{
             grid.classList.add("X8192")
         }
+    }
+}
+//shift ev
+function shiftLeft(){
+    for(let i=0; i<rows.length; i++ ){
+        //a temporary array to hold current values in a row before shift
+        let row = board[i]
+        //get value after shifted a row 
+        row = shift(row)
+        //push the value back to the board row
+        board[i] = row
     }
 }
