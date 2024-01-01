@@ -26,6 +26,10 @@ document.addEventListener('keyup', (evt) => {
     else if(evt.code == "ArrowUp"){
         updateBoardAfterShiftUp()
     }
+    else if(evt.code == "ArrowDown"){
+        updateBoardAfterShiftDown()
+    }
+
     
 })
 
@@ -164,7 +168,7 @@ function updateBoardAfterShiftUp() {
             board[3][j]
         ]
         row = shift(row)
-        
+
         for(let i = 0; i < rows; i++){
             board[i][j] = row[i]
             let num = board[i][j]
