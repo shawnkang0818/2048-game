@@ -16,9 +16,9 @@ let idx = 0
 /*------------------------ Cached Element References ------------------------*/
 const gridEls = document.querySelectorAll(".grid")
 /*----------------------------- Event Listeners -----------------------------*/
-document.addEventListener("keyup", (evt) => {
-    if(evt.code == "AroowLeft"){
-        shiftLeft()
+document.addEventListener('keyup', (evt) => {
+    if(evt.code == "ArrowLeft"){
+        updateBoardAfterShiftLeft()
     }
 })
 
@@ -33,10 +33,10 @@ window.onload = function(){
 
 function init(){
     board = [
-        [0, 2, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 16, 0],
-        [0, 2048, 0, 0]
+        [2, 2, 2, 2],
+        [2, 2, 2, 2],
+        [2, 2, 2, 2],
+        [2, 2, 2, 2]
     ]
     // board = [
     //     [0, 0, 0, 0],
@@ -47,7 +47,7 @@ function init(){
     //iteral the board to update the grid data 
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < colmns; j++) {
-            let num = board[i][j];
+            let num = board[i][j]
             let grid = document.querySelector(`#g${i}${j}`)
             updateGridStyle(grid, num);
         }
@@ -75,14 +75,15 @@ function updateGridStyle(grid, num){
 
 //remove the index of a row where hold 0.   Ex: [0, 2, 0, 2] - > [2,2]
 function removeZero(row){
-    return row.filter(num => num !=0)
+    return row.filter(num => num != 0)
+    
 }
 
 function shift(row){
     //remove value 0 before shift
     row = removeZero(row)
     
-    for(let i = 0; i<row.length; i++){
+    for(let i = 0; i<row.length-1; i++){
         //if the value in current index 
         //is the same as the next one plus them
         //[2,2,2] -> [4,0,2]
@@ -99,14 +100,15 @@ function shift(row){
     row = removeZero(row)
 
     //add 0 back to the end after add up
-    while(row.length<4){
+    while(row.length < 4){
         row.push(0)
     }
+    return row
 }
 
 //shift left
 function updateBoardAfterShiftLeft(){
-    for(let i=0; i<rows.length; i++ ){
+    for(let i=0; i<rows; i++ ){
         //a temporary array to hold current values 
         //in a row before shift
         let row = board[i]
@@ -114,5 +116,13 @@ function updateBoardAfterShiftLeft(){
         row = shift(row)
         //push the value back to the board row
         board[i] = row
+
+        //update board 
+        for(let j = 0; j<4; j++){
+            let grid = document.querySelector(`#g${i}${j}`)
+            let num = board[i][j]
+            updateGridStyle(grid, num)
+        }
+
     }
 }
