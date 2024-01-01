@@ -20,9 +20,13 @@ document.addEventListener('keyup', (evt) => {
     if(evt.code == "ArrowLeft"){
         updateBoardAfterShiftLeft()
     }
-    if(evt.code == "ArrowRight"){
+    else if(evt.code == "ArrowRight"){
         updateBoardAfterShiftRight()
     }
+    else if(evt.code == "ArrowUp"){
+        updateBoardAfterShiftUp()
+    }
+    
 })
 
 
@@ -148,3 +152,26 @@ function updateBoardAfterShiftRight(){
 
     }
 }
+
+//shit up
+function updateBoardAfterShiftUp() {
+    for(let j = 0; j < colmns; j++){
+        //[[2],[0],[2],[2]] -> [[2,0,2,2],[],[],[]]
+        let row = [
+            board[0][j],
+            board[1][j],
+            board[2][j],
+            board[3][j]
+        ]
+        row = shift(row)
+        board[0][j] = row[0]
+        board[1][j] = row[1]
+        board[2][j] = row[2]
+        board[3][j] = row[3]
+        for(let i = 0; i < rows; i++){
+            let num = board[i][j]
+            let grid = document.querySelector(`#g${i}${j}`)
+            updateGridStyle(grid, num)
+        }
+    }
+}  
