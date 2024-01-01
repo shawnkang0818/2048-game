@@ -19,15 +19,19 @@ const gridEls = document.querySelectorAll(".grid")
 document.addEventListener('keyup', (evt) => {
     if(evt.code == "ArrowLeft"){
         updateBoardAfterShiftLeft()
+        addNumToGrid()
     }
     else if(evt.code == "ArrowRight"){
         updateBoardAfterShiftRight()
+        addNumToGrid()
     }
     else if(evt.code == "ArrowUp"){
         updateBoardAfterShiftUp()
+        addNumToGrid()
     }
     else if(evt.code == "ArrowDown"){
         updateBoardAfterShiftDown()
+        addNumToGrid()
     }
 
     
@@ -47,7 +51,7 @@ function init(){
         [2, 2, 2, 2],
         [2, 2, 2, 2],
         [2, 2, 2, 2],
-        [2, 2, 2, 2]
+        [2, 2, 2048, 0]
     ]
     // board = [
     //     [0, 0, 0, 0],
@@ -64,6 +68,9 @@ function init(){
         }
     }
     //create 2 to begin the game
+    addNumToGrid()
+    addNumToGrid()
+
 }
 
 function updateGridStyle(grid, num){
@@ -177,3 +184,55 @@ function updateBoardAfterShiftUp() {
         }
     }
 }  
+function updateBoardAfterShiftDown() {
+    for(let j = 0; j < colmns; j++){
+        //[[2],[0],[2],[2]] -> [[2,0,2,2],[],[],[]]
+        let row = [
+            board[0][j],
+            board[1][j],
+            board[2][j],
+            board[3][j]
+        ]
+        // [[2,0,2,2],[],[],[]] -> [[2,2,0,2],[],[],[]]
+        row.reverse()
+        row = shift(row)
+        row.reverse()
+        for(let i = 0; i < rows; i++){
+            board[i][j] = row[i]
+            let num = board[i][j]
+            let grid = document.querySelector(`#g${i}${j}`)
+            updateGridStyle(grid, num)
+        }
+    }
+}  
+
+function hasEmptygrid() {
+    let count = 0;
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < colmns; j++) {
+            if (board[i][j] == 0) { //at least one zero in the board
+                return true;
+            }
+        }
+    }
+    return false;
+}
+//add a 2 to random grid
+function addNumToGrid(){
+    if(!hasEmptygrid()){
+        return 
+    }
+    let hasNum = false
+    //keep searching a empty grid while until it add a 2 in a grid
+    while (!hasNum){
+        let row = Math.floor(Math.random() * rows)
+        let colmn = Math.floor(Math.random() * colmns)
+        if(board[row][colmn] == 0){
+            board[row][colmn] = 2;
+            let grid = document.querySelector(`#g${row}${colmn}`)
+            grid.textContent = "2"
+            grid.classList.add("num2")
+            hasNum = true
+        }
+    }
+}
