@@ -4,8 +4,6 @@
 
 /*-------------------------------- Variables --------------------------------*/
 //hold each grid in the board
-
-//hold score 
 let board =[[], [], [], []]
 let score = 0
 let rows = 4
@@ -33,7 +31,7 @@ document.addEventListener('keyup', (evt) => {
         updateBoardAfterShiftDown()
         addNumToGrid()
     }
-
+    document.querySelector(".score").textContent = score;
     
 })
 
@@ -47,18 +45,19 @@ window.onload = function(){
 }
 
 function init(){
-    board = [
-        [2, 2, 2, 2],
-        [2, 2, 2, 2],
-        [2, 2, 2, 2],
-        [2, 2, 2048, 0]
-    ]
     // board = [
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0]
+    //     [4, 0 , 2, 2],
+    //     [2, 2, 2, 2],
+    //     [2, 2, 2, 2],
+    //     [2, 2, 2048, 0]
     // ]
+    board = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ]
+
     //iteral the board to update the grid data 
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < colmns; j++) {
@@ -109,7 +108,7 @@ function shift(row){
             row[i] += row[i]
             //clear the value in next index
             row[i+1] = 0
-            score +=row[i]
+            score += row[i]
         }
     }
     //remove 0 again after no matter what
@@ -205,7 +204,7 @@ function updateBoardAfterShiftDown() {
         }
     }
 }  
-
+// check if there is any empty grid
 function hasEmptygrid() {
     let count = 0;
     for (let i = 0; i < rows; i++) {
