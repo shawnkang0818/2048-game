@@ -164,11 +164,9 @@ function updateBoardAfterShiftUp() {
             board[3][j]
         ]
         row = shift(row)
-        board[0][j] = row[0]
-        board[1][j] = row[1]
-        board[2][j] = row[2]
-        board[3][j] = row[3]
+        
         for(let i = 0; i < rows; i++){
+            board[i][j] = row[i]
             let num = board[i][j]
             let grid = document.querySelector(`#g${i}${j}`)
             updateGridStyle(grid, num)
