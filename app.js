@@ -20,6 +20,9 @@ document.addEventListener('keyup', (evt) => {
     if(evt.code == "ArrowLeft"){
         updateBoardAfterShiftLeft()
     }
+    if(evt.code == "ArrowRight"){
+        updateBoardAfterShiftRight()
+    }
 })
 
 
@@ -57,7 +60,7 @@ function init(){
 
 function updateGridStyle(grid, num){
     //clear the value of grid
-    grid.innertext = ""
+    grid.textContent = ""
     //clear the class list of grid(clear style)
     grid.classList.value = ""
     //add grid back
@@ -115,6 +118,25 @@ function updateBoardAfterShiftLeft(){
         //get value after shifted a row 
         row = shift(row)
         //push the value back to the board row
+        board[i] = row
+
+        //update board 
+        for(let j = 0; j<4; j++){
+            let grid = document.querySelector(`#g${i}${j}`)
+            let num = board[i][j]
+            updateGridStyle(grid, num)
+        }
+
+    }
+}
+//shit right 
+function updateBoardAfterShiftRight(){
+    for(let i=0; i<rows; i++ ){
+        let row = board[i]
+        //[2,0,2,2] -> [2,2,0,2]
+        row.reverse()
+        row = shift(row)
+        row.reverse()
         board[i] = row
 
         //update board 
