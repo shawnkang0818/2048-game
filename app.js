@@ -9,7 +9,8 @@ let score = 0
 let rows = 4
 let colmns = 4
 let idx = 0
-
+//audio
+let playBtn, muteBtn, shiftSound
 
 /*------------------------ Cached Element References ------------------------*/
 const gridEls = document.querySelectorAll(".grid")
@@ -19,6 +20,7 @@ document.addEventListener('keyup', (evt) => {
         updateBoardAfterShiftLeft()
         addNumToGrid()
         soundEffect()
+        
     }
     else if(evt.code == "ArrowRight"){
         updateBoardAfterShiftRight()
@@ -61,7 +63,7 @@ function init(){
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ]
-
+    score = 0
     //iteral the board to update the grid data 
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < colmns; j++) {
@@ -239,7 +241,47 @@ function addNumToGrid(){
         }
     }
 }
-function soundEffect(){
-    let audio = new Audio("sound/shift.mp3")
-    audio.play()
+
+function restartBtn(){
+    init()
 }
+function soundEffect(){
+    shiftSound = new Audio()
+    shiftSound.src = "sound/shift1.mp3"
+    shiftSound.play()
+}
+
+function initAudioPlayer(){
+    audio = new Audio()
+    audio.src = "sound/backgroundmusic.mp3"
+    audio.loop = true
+    // audio.play()
+    playBtn = document.getElementById("playPauseBtn")
+    muteBtn = document.getElementById('muteBtn')
+
+    playBtn.addEventListener('click', playPause)
+    muteBtn.addEventListener('click', mute)
+}
+function playPause(){
+    if(audio.paused){
+        audio.play()
+        playBtn.style.background = "url(img/pause.svg) no-repeat"
+    }
+    else{
+        audio.pause()
+        playBtn.style.background = "url(img/play.svg) no-repeat"
+    }
+}
+function mute(){
+    if(audio.muted){
+        audio.muted = false 
+        muteBtn.style.background = "url(img/music-f.svg) no-repeat"
+    }
+    else{
+        audio.muted = true
+        muteBtn.style.background = "url(img/mute.svg) no-repeat"
+    }
+
+}
+
+window.addEventListener('load', initAudioPlayer)
