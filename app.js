@@ -13,8 +13,11 @@ let idx = 0
 let playBtn, muteBtn, shiftSound
 
 /*------------------------ Cached Element References ------------------------*/
-const gridEls = document.querySelectorAll(".grid")
+// const gridEls = document.querySelectorAll(".grid")
+const restartBtn = document.getElementById('restart')
 /*----------------------------- Event Listeners -----------------------------*/
+window.addEventListener('load', initAudioPlayer)
+restartBtn.addEventListener('click', init)
 document.addEventListener('keyup', (evt) => {
     if(evt.code == "ArrowLeft"){
         updateBoardAfterShiftLeft()
@@ -46,9 +49,10 @@ document.addEventListener('keyup', (evt) => {
 //setup board, add all initiate value to each grid
 //generate randome Integer in order to choose index 
 
-window.onload = function(){
-    init();
-}
+// window.onload = function(){
+//     init();
+// }
+init()
 
 function init(){
     // board = [
@@ -242,13 +246,13 @@ function addNumToGrid(){
     }
 }
 
-function restartBtn(){
-    init()
-}
+
 function soundEffect(){
     shiftSound = new Audio()
     shiftSound.src = "sound/shift1.mp3"
-    shiftSound.play()
+    if(!audio.muted){
+        shiftSound.play()
+    }
 }
 
 function initAudioPlayer(){
@@ -284,4 +288,3 @@ function mute(){
 
 }
 
-window.addEventListener('load', initAudioPlayer)
