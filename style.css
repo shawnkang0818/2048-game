@@ -38,7 +38,19 @@ h1 {
     font-size: 50px;
     font-weight: bold;
 }
+.cover-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #faf8ef;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+}
 button#playPauseBtn {
     outline: none;
     margin: 10px;

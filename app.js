@@ -16,26 +16,31 @@ let playBtn, muteBtn, shiftSound
 // const gridEls = document.querySelectorAll(".grid")
 const restartBtn = document.getElementById('restart')
 /*----------------------------- Event Listeners -----------------------------*/
-window.addEventListener('load', initAudioPlayer)
+// window.addEventListener('load', initAudioPlayer)
+
 restartBtn.addEventListener('click', init)
-document.addEventListener('keyup', (evt) => {
-    if(evt.code == "ArrowLeft"){
+document.addEventListener('keypress', (evt) => {
+    if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
+        render()
         updateBoardAfterShiftLeft()
         addNumToGrid()
         soundEffect()
         
     }
-    else if(evt.code == "ArrowRight"){
+    else if(evt.code == "ArrowRight" || evt.code == "KeyD"){
+        render()
         updateBoardAfterShiftRight()
         addNumToGrid()
         soundEffect()
     }
-    else if(evt.code == "ArrowUp"){
+    else if(evt.code == "ArrowUp" || evt.code == "KeyW"){
+        render()
         updateBoardAfterShiftUp()
         addNumToGrid()
         soundEffect()
     }
-    else if(evt.code == "ArrowDown"){
+    else if(evt.code == "ArrowDown" || evt.code == "KeyS"){
+        render()
         updateBoardAfterShiftDown()
         addNumToGrid()
         soundEffect()
@@ -52,6 +57,7 @@ document.addEventListener('keyup', (evt) => {
 // window.onload = function(){
 //     init();
 // }
+
 init()
 
 function init(){
@@ -77,6 +83,7 @@ function init(){
         }
     }
     //create 2 to begin the game
+    initAudioPlayer()
     addNumToGrid()
     addNumToGrid()
 
@@ -214,6 +221,7 @@ function updateBoardAfterShiftDown() {
         }
     }
 }  
+
 // check if there is any empty grid
 function hasEmptygrid() {
     let count = 0;
