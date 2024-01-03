@@ -62,6 +62,13 @@ document.addEventListener('keyup', (evt) => {
 // }
 
 
+function checkForLose(){
+    if(!avaliableMove){
+        restartBtn.textContent= "Start Again"
+        message.innerHTML = "Game Over!"
+        coverScreen.classList.remove('hide')
+    }
+}
 //run Game
 render()
 function render(){
