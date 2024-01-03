@@ -13,7 +13,9 @@ let idx = 0
 let playBtn, muteBtn, shiftSound
 
 /*------------------------ Cached Element References ------------------------*/
-
+const startMessage =document.getElementById('over-text')
+const coverScreen =document.querySelector('.cover-screen')
+//const gridEls = document.querySelectorAll(".grid")
 
 const restartBtn = document.getElementById('restart')
 /*----------------------------- Event Listeners -----------------------------*/
