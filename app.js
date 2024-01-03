@@ -69,6 +69,16 @@ function checkForLose(){
         coverScreen.classList.remove('hide')
     }
 }
+
+//check if current and next element have same number
+function hasSameNext(colmn){
+    for(let i = 0; i<colmn.length-1; i++){
+        if(colmn[i] == colmn[i+1]){
+            return true
+        }
+    }
+    return false
+}
 //run Game
 render()
 function render(){
