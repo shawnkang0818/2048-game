@@ -63,6 +63,17 @@ document.addEventListener('keyup', (evt) => {
 
 
 //run Game
+render()
+function render(){
+   restartBtn.textContent = "Start Game" 
+   startMessage.textContent = "Press W, A, S, D to Move"
+   startMessage.classList.remove('hide')
+    restartBtn.addEventListener('click', () =>{
+        init()
+        coverScreen.classList.add('hide')
+        restartBtn.textContent = "Restart" 
+    })
+}
 
 function init(){
     score = 0
