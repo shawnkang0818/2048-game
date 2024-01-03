@@ -13,7 +13,7 @@ let idx = 0
 let playBtn, muteBtn, shiftSound
 
 /*------------------------ Cached Element References ------------------------*/
-const startMessage =document.getElementById('over-text')
+const message =document.getElementById('over-text')
 const coverScreen =document.querySelector('.cover-screen')
 //const gridEls = document.querySelectorAll(".grid")
 
@@ -66,8 +66,8 @@ document.addEventListener('keyup', (evt) => {
 render()
 function render(){
    restartBtn.textContent = "Start Game" 
-   startMessage.textContent = "Press W, A, S, D to Move"
-   startMessage.classList.remove('hide')
+   message.textContent = "Press W, A, S, D to Move"
+   message.classList.remove('hide')
     restartBtn.addEventListener('click', () =>{
         init()
         coverScreen.classList.add('hide')
