@@ -63,7 +63,7 @@ document.addEventListener('keyup', (evt) => {
 
 
 function checkForLose(){
-    if(!avaliableMove){
+    if(!hasAvailableMove){
         restartBtn.textContent= "Start Again"
         message.innerHTML = "Game Over!"
         coverScreen.classList.remove('hide')
@@ -79,6 +79,25 @@ function hasSameNext(colmn){
     }
     return false
 }
+
+//check if it has available move
+function hasAvailableMove(){
+    for(let i=0; i<board.length; i++){
+        if(hasSameNext(board[i])){
+            return true
+        }
+        let colToRwo =[]
+        for(let j = 0; j< colmns; j++){
+            colToRwo.push(board[i][j])
+        }
+        if(hasSameNext(colToRwo)){
+            return true
+        }
+    }
+    return false
+}
+
+
 //run Game
 render()
 function render(){
