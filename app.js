@@ -168,6 +168,7 @@ function removeZero(row){
     
 }
 
+//shift evry row
 function shift(row){
     //remove value 0 before shift
     row = removeZero(row)
@@ -176,7 +177,7 @@ function shift(row){
         //if the value in current index 
         //is the same as the next one plus them
         //[2,2,2] -> [4,0,2]
-        if(row[i] == row[i+1]){
+        if(hasSameNext(row)){
             row[i] += row[i]
             //clear the value in next index
             row[i+1] = 0
