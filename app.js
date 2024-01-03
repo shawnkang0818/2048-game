@@ -13,34 +13,35 @@ let idx = 0
 let playBtn, muteBtn, shiftSound
 
 /*------------------------ Cached Element References ------------------------*/
-// const gridEls = document.querySelectorAll(".grid")
+
+
 const restartBtn = document.getElementById('restart')
 /*----------------------------- Event Listeners -----------------------------*/
-// window.addEventListener('load', initAudioPlayer)
+
 
 restartBtn.addEventListener('click', init)
-document.addEventListener('keypress', (evt) => {
+document.addEventListener('keyup', (evt) => {
     if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
-        render()
+        
         updateBoardAfterShiftLeft()
         addNumToGrid()
         soundEffect()
         
     }
     else if(evt.code == "ArrowRight" || evt.code == "KeyD"){
-        render()
+        
         updateBoardAfterShiftRight()
         addNumToGrid()
         soundEffect()
     }
     else if(evt.code == "ArrowUp" || evt.code == "KeyW"){
-        render()
+        
         updateBoardAfterShiftUp()
         addNumToGrid()
         soundEffect()
     }
     else if(evt.code == "ArrowDown" || evt.code == "KeyS"){
-        render()
+        
         updateBoardAfterShiftDown()
         addNumToGrid()
         soundEffect()
@@ -58,9 +59,12 @@ document.addEventListener('keypress', (evt) => {
 //     init();
 // }
 
-init()
+
+//run Game
 
 function init(){
+    score = 0
+    document.querySelector(".score").textContent = score;
     // board = [
     //     [4, 0 , 2, 2],
     //     [2, 2, 2, 2],
@@ -68,12 +72,12 @@ function init(){
     //     [2, 2, 2048, 0]
     // ]
     board = [
-        [0, 0, 0, 0],
+        [2048, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ]
-    score = 0
+    
     //iteral the board to update the grid data 
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < colmns; j++) {
@@ -82,8 +86,10 @@ function init(){
             updateGridStyle(grid, num);
         }
     }
-    //create 2 to begin the game
+    
     initAudioPlayer()
+    //create 2 to begin the game
+
     addNumToGrid()
     addNumToGrid()
 

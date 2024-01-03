@@ -8,14 +8,14 @@
     <title>2048 Game</title>
 </head>
 <body>
-    <h1>2048</h1>
-    <div id="score"> Score:<span class="score"></span></div>
+    <h1 class="over-text">2048</h1>
+    <div id="score"> Score : <span class="score"></span></div>
     <button id="playPauseBtn"></button>
     <button id="muteBtn"></button>
-    <div class = "cover-screen">
-        <h2 id = "over-text" class="'hide">Game Over</h2>
+    <div class="cover-screen " >
+        <h2 id="over-text" class="hide">Game Over</h2>
     </div>
-    <div id="board">
+    <div id="board" class="">
         <div class="grid" id="g00"></div>
         <div class="grid" id="g01"></div>
         <div class="grid" id="g02"></div>
@@ -33,12 +33,10 @@
         <div class="grid" id="g32"></div>
         <div class="grid" id="g33"></div>
     </div>
-    <button id="restart" class="button-82-pushable" role="button">
-        <span class="button-82-shadow"></span>
-        <span class="button-82-edge"></span>
-        <span class="button-82-front text">
-          restart
-        </span>
-      </button>
+    <div>
+        <button id="restart" class="button" >
+            restart        
+        </button>
+    </div>
 </body>
 </html>
