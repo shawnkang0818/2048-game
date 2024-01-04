@@ -13,3 +13,4 @@ ___
 
 ___
 ##  Credits
+check out the [Attributions.](https://github.com/shawnkang0818/unit-1-2048-game/blob/main/attributions.md)
