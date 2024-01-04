@@ -76,6 +76,20 @@ function checkForLose(){
     }
 }
 
+// keep tracking rows to see if row available to shift 
+function availableRow(){
+    for(let i=0; i<rows; i++ ){
+        let row = board[i]
+        if(hasSame(row)){
+            return true
+        }
+    }
+    
+    
+    return false
+    
+}
+
 
 //run Game
 render()
