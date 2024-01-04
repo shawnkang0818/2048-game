@@ -79,7 +79,9 @@ initAudioPlayer()
 
 function checkForWin(num){
     if(num == 2048){
+        //continue game after win
         if(!isContinue){
+            victoryEffect()
             gameOver = true
             message.innerHTML = "Congrats! how smart to reach 2048"
             restartBtn.textContent= "Start Again"
@@ -98,12 +100,14 @@ function checkForWin(num){
 // check for lose, if so , update web page
 function checkForLose(){
     if(!availableRow() && !availableCol()){
+        loseEffect()
         gameOver = true
         restartBtn.textContent= "Start Again"
         message.innerHTML = "Game Over!"
         coverScreen.classList.remove('hide')
         audio.pause()
         playBtn.style.background = "url(img/play.svg) no-repeat" 
+        
     }
 }
 //check by row, check if elemnet from current index equal to nex index
@@ -172,7 +176,7 @@ function init(){
     //     [2, 2, 2048, 0]
     // ]
     board = [
-        [0, 1024, 1024, 0],
+        [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [, 0, 0, 0]
@@ -371,11 +375,23 @@ function addNumToGrid(){
 function soundEffect(){
     shiftSound = new Audio()
     shiftSound.src = "sound/shift1.mp3"
-    shiftSound.volume = 0.1
+    shiftSound.volume = 0.2
     shiftSound.playbackRate=3
     if(!audio.muted){
         shiftSound.play()
     }
+}
+function victoryEffect(){
+    victory = new Audio()
+    victory.src = "sound/victory.mp3"
+    victory.volume = 0.3
+    victory.play()
+}
+function loseEffect(){
+    lose = new Audio()
+    lose.src = "sound/lose.mp3"
+    lose.volume = 0.3
+    lose.play()
 }
 function initAudioPlayer(){
     audio.volume = 0.2
