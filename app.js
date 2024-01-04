@@ -50,6 +50,7 @@ document.addEventListener('keyup', (evt) => {
         // addNumToGrid()
         // soundEffect()
     }
+    soundEffect()
     addNumToGrid()
     availableGridInRow=availableRow()
     availableGrinInCol=availableCol()
@@ -333,16 +334,14 @@ function addNumToGrid(){
             return
         }
         else if(availableGridInRow === false && availableGrinInCol === false){
-        
             console.log("game over")
             console.log(board)
             checkForLose()
-            
         }
     }
 }
 
-
+//audio and sound effect
 function soundEffect(){
     shiftSound = new Audio()
     shiftSound.src = "sound/shift1.mp3"
@@ -350,11 +349,11 @@ function soundEffect(){
         shiftSound.play()
     }
 }
-
 function initAudioPlayer(){
     audio = new Audio()
     audio.src = "sound/backgroundmusic.mp3"
     audio.loop = true
+    audio.muted = true
     // audio.play()
     playBtn = document.getElementById("playPauseBtn")
     muteBtn = document.getElementById('muteBtn')

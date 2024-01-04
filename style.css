@@ -39,6 +39,8 @@ h1 {
     font-weight: bold;
 }
 .cover-screen {
+    text-transform: uppercase;
+    font-size: 100px;
     position: absolute;
     top: 0;
     left: 0;
@@ -49,6 +51,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    opacity: 0.5;
 }
 .hide {
     display: none;
@@ -67,7 +70,7 @@ button#muteBtn {
     outline: none;
     margin: 10px;
     display: inline-block;
-    background: url(img/music-f.svg) no-repeat;
+    background: url(img/mute.svg) no-repeat;
     border: none;
     width: 30px;
     height: 30px;
