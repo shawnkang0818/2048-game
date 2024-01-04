@@ -77,7 +77,6 @@ function checkForLose(){
         restartBtn.textContent= "Start Again"
         message.innerHTML = "Game Over!"
         coverScreen.classList.remove('hide')
-        console.log('game over')
     }
 }
 //check by row, check if elemnet from current index equal to nex index
@@ -319,7 +318,6 @@ function hasEmptygrid() {
 //add a 2 to random grid
 function addNumToGrid(){
     if(hasEmptygrid()){
-        console.log("has empty grid")
         let hasNum = false
         //keep searching a empty grid until it add a 2 in a grid
         while (!hasNum){
@@ -337,15 +335,10 @@ function addNumToGrid(){
     else if(!hasEmptygrid()) {
         
         if(availableGridInRow === true || availableGrinInCol === true){
-            console.log("no empty board")
-            console.log(board)
             return
         }
         else if(availableGridInRow === false && availableGrinInCol === false){
-            console.log("game over")
-            console.log(board)
             checkForLose()
-            return
         }
     }
 }
