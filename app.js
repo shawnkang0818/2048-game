@@ -12,6 +12,7 @@ let idx = 0
 let colToRow =[]
 let availableGridInRow
 let availableGrinInCol
+let gameOver = false
 //audio
 let playBtn, muteBtn, shiftSound
 
@@ -26,36 +27,38 @@ const restartBtn = document.getElementById('restart')
 
 restartBtn.addEventListener('click', init)
 document.addEventListener('keyup', (evt) => {
-    if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
-        
-        updateBoardAfterShiftLeft()
-        // addNumToGrid()
-        // soundEffect()
+    if(!gameOver){
+        if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
+            
+            updateBoardAfterShiftLeft()
+            // addNumToGrid()
+            // soundEffect()
+        }
+        else if(evt.code == "ArrowRight" || evt.code == "KeyD"){
+            
+            updateBoardAfterShiftRight()
+            // addNumToGrid()
+            // soundEffect()
+        }
+        else if(evt.code == "ArrowUp" || evt.code == "KeyW"){
+            
+            updateBoardAfterShiftUp()
+            // addNumToGrid()
+            // soundEffect()
+        }
+        else if(evt.code == "ArrowDown" || evt.code == "KeyS"){
+            
+            updateBoardAfterShiftDown()
+            // addNumToGrid()
+            // soundEffect()
+        }
+        soundEffect()
     }
-    else if(evt.code == "ArrowRight" || evt.code == "KeyD"){
-        
-        updateBoardAfterShiftRight()
-        // addNumToGrid()
-        // soundEffect()
-    }
-    else if(evt.code == "ArrowUp" || evt.code == "KeyW"){
-        
-        updateBoardAfterShiftUp()
-        // addNumToGrid()
-        // soundEffect()
-    }
-    else if(evt.code == "ArrowDown" || evt.code == "KeyS"){
-        
-        updateBoardAfterShiftDown()
-        // addNumToGrid()
-        // soundEffect()
-    }
-    soundEffect()
+    
     addNumToGrid()
     availableGridInRow=availableRow()
     availableGrinInCol=availableCol()
     document.querySelector(".score").textContent = score;
-    
 })
 
 
@@ -70,6 +73,7 @@ document.addEventListener('keyup', (evt) => {
 // check for lose, if so , update web page
 function checkForLose(){
     if(!availableRow() && !availableCol()){
+        gameOver = true
         restartBtn.textContent= "Start Again"
         message.innerHTML = "Game Over!"
         coverScreen.classList.remove('hide')
@@ -124,11 +128,12 @@ function render(){
    restartBtn.textContent = "Start Game" 
    message.textContent = "Press W, A, S, D to Move"
    message.classList.remove('hide')
-    restartBtn.addEventListener('click', () =>{
+   restartBtn.addEventListener('click', () =>{
         init()
         coverScreen.classList.add('hide')
         restartBtn.textContent = "Restart" 
     })
+
 }
 
 function init(){
@@ -337,6 +342,7 @@ function addNumToGrid(){
             console.log("game over")
             console.log(board)
             checkForLose()
+            return
         }
     }
 }
