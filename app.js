@@ -12,7 +12,7 @@ let idx = 0
 let colToRow =[]
 let availableGridInRow
 let availableGrinInCol
-let gameOver
+let gameOver = true
 let isContinue 
 audio = new Audio()
 //audio
