@@ -385,13 +385,17 @@ function victoryEffect(){
     victory = new Audio()
     victory.src = "sound/victory.mp3"
     victory.volume = 0.3
-    victory.play()
+    if(!audio.muted){
+        victory.play()
+    }
 }
 function loseEffect(){
     lose = new Audio()
     lose.src = "sound/lose.mp3"
     lose.volume = 0.3
-    lose.play()
+    if(!audio.muted){
+        lose.play()
+    }
 }
 function initAudioPlayer(){
     audio.volume = 0.2
