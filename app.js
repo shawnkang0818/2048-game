@@ -12,7 +12,7 @@ let idx = 0
 let colToRow =[]
 let availableGridInRow
 let availableGrinInCol
-let gameOver = false
+let gameOver
 //audio
 let playBtn, muteBtn, shiftSound
 
@@ -138,6 +138,9 @@ function render(){
 
 function init(){
     score = 0
+    availableGridInRow = true
+    availableGrinInCol = true
+    gameOver = false
     document.querySelector(".score").textContent = score;
     // board = [
     //     [4, 0 , 2, 2],
@@ -146,8 +149,8 @@ function init(){
     //     [2, 2, 2048, 0]
     // ]
     board = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
+        [0, 4096, 0, 0],
+        [0, 0, 2048, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ]
@@ -178,11 +181,11 @@ function updateGridStyle(grid, num){
     grid.classList.add("grid")
     if(num>0){
         grid.innerText = num
-        if(num<4096){
+        if(num<=4096){
             grid.classList.add(`num${num.toString()}`)
         }
         else{
-            grid.classList.add("X8192")
+            grid.classList.add("num8192")
         }
     }
 }

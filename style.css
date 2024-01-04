@@ -27,6 +27,7 @@ h1 {
     grid-gap: 10px;
     grid-template-columns: 140px 140px 140px 140px;
     grid-template-rows: 140px 140px 140px 140px;
+    align-content: center;
 
 }
 .grid {
@@ -37,6 +38,7 @@ h1 {
     align-items: center;
     font-size: 50px;
     font-weight: bold;
+    
 }
 .cover-screen {
     text-transform: uppercase;
@@ -52,6 +54,7 @@ h1 {
     justify-content: center;
     align-items: center;
     opacity: 0.5;
+    
 }
 .hide {
     display: none;
@@ -67,6 +70,7 @@ button#playPauseBtn {
     cursor: pointer;
 }
 button#muteBtn {
+    
     outline: none;
     margin: 10px;
     display: inline-block;
@@ -157,6 +161,10 @@ button#muteBtn {
     background-color: rgb(30, 66, 117);
 }
 .num2048{
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(197, 30, 30);
+    color: #ffffff;
+}
+.num4096{
+    background-color: rgb(223, 142, 35);
     color: #ffffff;
 }
