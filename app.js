@@ -10,13 +10,21 @@ let rows = 4
 let colmns = 4
 let idx = 0
 let colToRow =[]
+//hold row possible move when gird fill 
 let availableGridInRow
+//hold column possible move when gird fill 
 let availableGrinInCol
+//track for game over
 let gameOver = true
+//track continue after win
 let isContinue 
+//main audio
 audio = new Audio()
 //audio
 let playBtn, muteBtn, shiftSound
+//to enable quick win function
+let quick = false
+
 
 /*------------------------ Cached Element References ------------------------*/
 const message =document.getElementById('over-text')
@@ -76,6 +84,27 @@ document.addEventListener('keyup', (evt) => {
 initAudioPlayer()
 
 //check for win if grid number = 2048
+function quickWin(){
+    score = 0
+    isContinue = false 
+    availableGridInRow = true
+    availableGrinInCol = true
+    gameOver = false
+    document.querySelector(".score").textContent = score;
+    board = [
+        [4, 0 , 2, 2],
+        [2, 2, 2, 2],
+        [2, 2, 2, 2],
+        [2, 2, 1024, 1024]
+    ]
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < colmns; j++) {
+            let num = board[i][j]
+            let grid = document.querySelector(`#g${i}${j}`)
+            updateGridStyle(grid, num);
+        }
+    }
+}
 
 function checkForWin(num){
     if(num == 2048){
@@ -156,7 +185,11 @@ function render(){
    message.textContent = "Press W, A, S, D to Move"
    message.classList.remove('hide')
    restartBtn.addEventListener('click', () =>{
-        init()
+        if(quick){
+            quickWin()
+        }else{
+            init()
+        }
         coverScreen.classList.add('hide')
         restartBtn.textContent = "Restart" 
     })
