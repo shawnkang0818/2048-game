@@ -23,7 +23,8 @@ audio = new Audio()
 //audio
 let playBtn, muteBtn, shiftSound
 //to enable quick win function
-let quick = false
+let quickWin = false
+let quickLose = false
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -84,7 +85,7 @@ document.addEventListener('keyup', (evt) => {
 initAudioPlayer()
 
 //check for win if grid number = 2048
-function quickWin(){
+function runQuickWin(){
     score = 0
     isContinue = false 
     availableGridInRow = true
@@ -96,6 +97,27 @@ function quickWin(){
         [2, 2, 2, 2],
         [2, 2, 2, 2],
         [2, 2, 1024, 1024]
+    ]
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < colmns; j++) {
+            let num = board[i][j]
+            let grid = document.querySelector(`#g${i}${j}`)
+            updateGridStyle(grid, num);
+        }
+    }
+}
+function runQuickLose(){
+    score = 0
+    isContinue = false 
+    availableGridInRow = true
+    availableGrinInCol = true
+    gameOver = false
+    document.querySelector(".score").textContent = score;
+    board = [
+        [4, 8, 4, 8],
+        [16, 4, 8, 16],
+        [2, 8, 4, 2],
+        [4, 16, 32, 64]
     ]
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < colmns; j++) {
@@ -185,9 +207,12 @@ function render(){
    message.textContent = "Press W, A, S, D to Move"
    message.classList.remove('hide')
    restartBtn.addEventListener('click', () =>{
-        if(quick){
-            quickWin()
-        }else{
+        if(quickWin){
+            runQuickWin()
+        }else if(quickLose){
+            runQuickLose()
+        }
+        else{
             init()
         }
         coverScreen.classList.add('hide')
