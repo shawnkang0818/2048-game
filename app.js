@@ -309,14 +309,10 @@ function hasEmptygrid() {
 }
 //add a 2 to random grid
 function addNumToGrid(){
-    // if(!hasEmptygrid()){
-    //     return 
-    // }
-    
     if(hasEmptygrid()){
         console.log("has empty grid")
         let hasNum = false
-        //keep searching a empty grid while until it add a 2 in a grid
+        //keep searching a empty grid until it add a 2 in a grid
         while (!hasNum){
             let row = Math.floor(Math.random() * rows)
             let colmn = Math.floor(Math.random() * colmns)
@@ -327,6 +323,21 @@ function addNumToGrid(){
                 grid.classList.add("num2")
                 hasNum = true
             }
+        }
+    }
+    else if(!hasEmptygrid()) {
+        
+        if(availableGridInRow === true || availableGrinInCol === true){
+            console.log("no empty board")
+            console.log(board)
+            return
+        }
+        else if(availableGridInRow === false && availableGrinInCol === false){
+        
+            console.log("game over")
+            console.log(board)
+            checkForLose()
+            
         }
     }
 }
