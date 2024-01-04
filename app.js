@@ -20,13 +20,15 @@ let playBtn, muteBtn, shiftSound
 /*------------------------ Cached Element References ------------------------*/
 const message =document.getElementById('over-text')
 const coverScreen =document.querySelector('.cover-screen')
-//const gridEls = document.querySelectorAll(".grid")
+const ctnBtn = document.getElementById('continue')
 
 const restartBtn = document.getElementById('restart')
 /*----------------------------- Event Listeners -----------------------------*/
-
-
 restartBtn.addEventListener('click', init)
+ctnBtn.addEventListener('click', () =>{
+    coverScreen.classList.add('hide')
+    gameOver = false
+})
 document.addEventListener('keyup', (evt) => {
     if(!gameOver){
         if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
@@ -68,6 +70,20 @@ document.addEventListener('keyup', (evt) => {
 //generate randome Integer in order to choose index 
 initAudioPlayer()
 
+//check for win if grid number = 2048
+function checkForWin(num){
+    if(num == 2048){
+        gameOver = true
+        message.innerHTML = "Congrats! how smart to reach 2048"
+        restartBtn.textContent= "Start Again"
+        coverScreen.classList.remove('hide')
+        ctnBtn.classList.remove('hide')
+        ctnBtn.innerText = "Continue"
+        audio.pause()
+        playBtn.style.background = "url(img/play.svg) no-repeat" 
+    }
+}
+
 // check for lose, if so , update web page
 function checkForLose(){
     if(!availableRow() && !availableCol()){
@@ -76,8 +92,7 @@ function checkForLose(){
         message.innerHTML = "Game Over!"
         coverScreen.classList.remove('hide')
         audio.pause()
-        playBtn.style.background = "url(img/play.svg) no-repeat"
-        
+        playBtn.style.background = "url(img/play.svg) no-repeat" 
     }
 }
 //check by row, check if elemnet from current index equal to nex index
@@ -145,10 +160,10 @@ function init(){
     //     [2, 2, 2048, 0]
     // ]
     board = [
-        [0, 4096, 0, 0],
-        [0, 0, 2048, 0],
+        [0, 1024, 1024, 0],
         [0, 0, 0, 0],
-        [8192, 0, 0, 0]
+        [0, 0, 0, 0],
+        [, 0, 0, 0]
     ]
     
     //iteral the board to update the grid data 
@@ -184,7 +199,7 @@ function updateGridStyle(grid, num){
             grid.classList.add("num8192")
         }
     }
-    checkForWin()
+    checkForWin(num)
 }
 
 //remove the index of a row where hold 0.   Ex: [0, 2, 0, 2] - > [2,2]
