@@ -75,6 +75,15 @@ function checkForLose(){
         console.log('game over')
     }
 }
+//check by row, check if elemnet from current index equal to nex index
+function hasSame(row){
+    for(let i = 0; i<row.length-1; i++){
+        if(row[i] == row[i+1]){
+            return true
+        }
+    }
+    return false
+}
 
 //convert columns to row, and keep tracking column to see if it possible to shift
 function availableCol(){
