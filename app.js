@@ -37,31 +37,33 @@ document.addEventListener('keyup', (evt) => {
         if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
             
             updateBoardAfterShiftLeft()
-            // addNumToGrid()
+            addNumToGrid()
             // soundEffect()
         }
         else if(evt.code == "ArrowRight" || evt.code == "KeyD"){
             
             updateBoardAfterShiftRight()
-            // addNumToGrid()
+            addNumToGrid()
             // soundEffect()
         }
         else if(evt.code == "ArrowUp" || evt.code == "KeyW"){
             
             updateBoardAfterShiftUp()
-            // addNumToGrid()
+            addNumToGrid()
             // soundEffect()
         }
         else if(evt.code == "ArrowDown" || evt.code == "KeyS"){
             
             updateBoardAfterShiftDown()
-            // addNumToGrid()
+            addNumToGrid()
             // soundEffect()
         }
         soundEffect()
+    }else{
+        return
     }
     
-    addNumToGrid()
+    
     availableGridInRow=availableRow()
     availableGrinInCol=availableCol()
     document.querySelector(".score").textContent = score;
@@ -370,6 +372,7 @@ function soundEffect(){
     shiftSound = new Audio()
     shiftSound.src = "sound/shift1.mp3"
     shiftSound.volume = 0.1
+    shiftSound.playbackRate=3
     if(!audio.muted){
         shiftSound.play()
     }
