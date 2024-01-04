@@ -9,6 +9,7 @@ let score = 0
 let rows = 4
 let colmns = 4
 let idx = 0
+let colToRow =[]
 //audio
 let playBtn, muteBtn, shiftSound
 
@@ -26,28 +27,30 @@ document.addEventListener('keyup', (evt) => {
     if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
         
         updateBoardAfterShiftLeft()
-        addNumToGrid()
-        soundEffect()
-        
+        // addNumToGrid()
+        // soundEffect()
     }
     else if(evt.code == "ArrowRight" || evt.code == "KeyD"){
         
         updateBoardAfterShiftRight()
-        addNumToGrid()
-        soundEffect()
+        // addNumToGrid()
+        // soundEffect()
     }
     else if(evt.code == "ArrowUp" || evt.code == "KeyW"){
         
         updateBoardAfterShiftUp()
-        addNumToGrid()
-        soundEffect()
+        // addNumToGrid()
+        // soundEffect()
     }
     else if(evt.code == "ArrowDown" || evt.code == "KeyS"){
         
         updateBoardAfterShiftDown()
-        addNumToGrid()
-        soundEffect()
+        // addNumToGrid()
+        // soundEffect()
     }
+    addNumToGrid()
+    availableGridInRow=availableRow()
+    availableGrinInCol=availableCol()
     document.querySelector(".score").textContent = score;
     
 })
@@ -61,40 +64,14 @@ document.addEventListener('keyup', (evt) => {
 //     init();
 // }
 
-
+// check for lose, if so , update web page
 function checkForLose(){
-    if(!hasAvailableMove){
+    if(!availableRow() && !availableCol()){
         restartBtn.textContent= "Start Again"
         message.innerHTML = "Game Over!"
         coverScreen.classList.remove('hide')
+        console.log('game over')
     }
-}
-
-//check if current and next element have same number
-function hasSameNext(colmn){
-    for(let i = 0; i<colmn.length-1; i++){
-        if(colmn[i] == colmn[i+1]){
-            return true
-        }
-    }
-    return false
-}
-
-//check if it has available move
-function hasAvailableMove(){
-    for(let i=0; i<board.length; i++){
-        if(hasSameNext(board[i])){
-            return true
-        }
-        let colToRwo =[]
-        for(let j = 0; j< colmns; j++){
-            colToRwo.push(board[i][j])
-        }
-        if(hasSameNext(colToRwo)){
-            return true
-        }
-    }
-    return false
 }
 
 
@@ -121,7 +98,7 @@ function init(){
     //     [2, 2, 2048, 0]
     // ]
     board = [
-        [2048, 0, 0, 0],
+        [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
@@ -170,14 +147,14 @@ function removeZero(row){
 
 //shift evry row
 function shift(row){
-    //remove value 0 before shift
+    //remove 0 before shift
     row = removeZero(row)
     
     for(let i = 0; i<row.length-1; i++){
         //if the value in current index 
         //is the same as the next one plus them
         //[2,2,2] -> [4,0,2]
-        if(hasSameNext(row)){
+        if(row[i] == row[i+1]){
             row[i] += row[i]
             //clear the value in next index
             row[i+1] = 0
@@ -232,7 +209,6 @@ function updateBoardAfterShiftRight(){
             let num = board[i][j]
             updateGridStyle(grid, num)
         }
-
     }
 }
 
@@ -244,8 +220,7 @@ function updateBoardAfterShiftUp() {
             board[0][j],
             board[1][j],
             board[2][j],
-            board[3][j]
-        ]
+            board[3][j]]
         row = shift(row)
 
         for(let i = 0; i < rows; i++){
@@ -292,20 +267,24 @@ function hasEmptygrid() {
 }
 //add a 2 to random grid
 function addNumToGrid(){
-    if(!hasEmptygrid()){
-        return 
-    }
-    let hasNum = false
-    //keep searching a empty grid while until it add a 2 in a grid
-    while (!hasNum){
-        let row = Math.floor(Math.random() * rows)
-        let colmn = Math.floor(Math.random() * colmns)
-        if(board[row][colmn] == 0){
-            board[row][colmn] = 2;
-            let grid = document.querySelector(`#g${row}${colmn}`)
-            grid.textContent = "2"
-            grid.classList.add("num2")
-            hasNum = true
+    // if(!hasEmptygrid()){
+    //     return 
+    // }
+    
+    if(hasEmptygrid()){
+        console.log("has empty grid")
+        let hasNum = false
+        //keep searching a empty grid while until it add a 2 in a grid
+        while (!hasNum){
+            let row = Math.floor(Math.random() * rows)
+            let colmn = Math.floor(Math.random() * colmns)
+            if(board[row][colmn] == 0){
+                board[row][colmn] = 2;
+                let grid = document.querySelector(`#g${row}${colmn}`)
+                grid.textContent = "2"
+                grid.classList.add("num2")
+                hasNum = true
+            }
         }
     }
 }
