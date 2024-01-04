@@ -76,7 +76,24 @@ function checkForLose(){
     }
 }
 
-// keep tracking rows to see if row available to shift 
+//convert columns to row, and keep tracking column to see if it possible to shift
+function availableCol(){
+    for(let j = 0; j < colmns; j++){
+        //[[2],[0],[2],[2]] -> [[2,0,2,2],[],[],[]]
+        let row = [
+            board[0][j],
+            board[1][j],
+            board[2][j],
+            board[3][j],
+        ]
+        if(hasSame(row)){
+            return true
+        }
+    }
+    return false
+}
+
+// keep tracking rows to see if row possible to shift 
 function availableRow(){
     for(let i=0; i<rows; i++ ){
         let row = board[i]
