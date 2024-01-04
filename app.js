@@ -13,6 +13,7 @@ let colToRow =[]
 let availableGridInRow
 let availableGrinInCol
 let gameOver
+audio = new Audio()
 //audio
 let playBtn, muteBtn, shiftSound
 
@@ -65,7 +66,7 @@ document.addEventListener('keyup', (evt) => {
 /*-------------------------------- Functions --------------------------------*/
 //setup board, add all initiate value to each grid
 //generate randome Integer in order to choose index 
-
+initAudioPlayer()
 // window.onload = function(){
 //     init();
 // }
@@ -77,6 +78,9 @@ function checkForLose(){
         restartBtn.textContent= "Start Again"
         message.innerHTML = "Game Over!"
         coverScreen.classList.remove('hide')
+        audio.pause()
+        playBtn.style.background = "url(img/play.svg) no-repeat"
+        
     }
 }
 //check by row, check if elemnet from current index equal to nex index
@@ -163,7 +167,7 @@ function init(){
         }
     }
     
-    initAudioPlayer()
+    
     //create 2 to begin the game
 
     addNumToGrid()
@@ -347,15 +351,18 @@ function addNumToGrid(){
 function soundEffect(){
     shiftSound = new Audio()
     shiftSound.src = "sound/shift1.mp3"
+    shiftSound.volume = 0.1
     if(!audio.muted){
         shiftSound.play()
     }
 }
 function initAudioPlayer(){
-    audio = new Audio()
+    audio.volume = 0.2
     audio.src = "sound/backgroundmusic.mp3"
     audio.loop = true
     audio.muted = true
+    audio.pause();
+    audio.currentTime = 0;
     // audio.play()
     playBtn = document.getElementById("playPauseBtn")
     muteBtn = document.getElementById('muteBtn')
