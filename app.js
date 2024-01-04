@@ -13,6 +13,7 @@ let colToRow =[]
 let availableGridInRow
 let availableGrinInCol
 let gameOver
+let isContinue 
 audio = new Audio()
 //audio
 let playBtn, muteBtn, shiftSound
@@ -28,6 +29,8 @@ restartBtn.addEventListener('click', init)
 ctnBtn.addEventListener('click', () =>{
     coverScreen.classList.add('hide')
     gameOver = false
+    ctnBtn.classList.add('hide')
+    isContinue = true
 })
 document.addEventListener('keyup', (evt) => {
     if(!gameOver){
@@ -71,16 +74,22 @@ document.addEventListener('keyup', (evt) => {
 initAudioPlayer()
 
 //check for win if grid number = 2048
+
 function checkForWin(num){
     if(num == 2048){
-        gameOver = true
-        message.innerHTML = "Congrats! how smart to reach 2048"
-        restartBtn.textContent= "Start Again"
-        coverScreen.classList.remove('hide')
-        ctnBtn.classList.remove('hide')
-        ctnBtn.innerText = "Continue"
-        audio.pause()
-        playBtn.style.background = "url(img/play.svg) no-repeat" 
+        if(!isContinue){
+            gameOver = true
+            message.innerHTML = "Congrats! how smart to reach 2048"
+            restartBtn.textContent= "Start Again"
+            coverScreen.classList.remove('hide')
+            ctnBtn.classList.remove('hide')
+            ctnBtn.innerText = "Continue"
+            audio.pause()
+            playBtn.style.background = "url(img/play.svg) no-repeat"
+        }
+        else{
+            return
+        }
     }
 }
 
@@ -149,6 +158,7 @@ function render(){
 
 function init(){
     score = 0
+    isContinue = false 
     availableGridInRow = true
     availableGrinInCol = true
     gameOver = false
