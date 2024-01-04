@@ -41,31 +41,28 @@ ctnBtn.addEventListener('click', () =>{
     ctnBtn.classList.add('hide')
     isContinue = true
 })
+
 document.addEventListener('keyup', (evt) => {
     if(!gameOver){
         if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
             
             updateBoardAfterShiftLeft()
             addNumToGrid()
-            // soundEffect()
         }
         else if(evt.code == "ArrowRight" || evt.code == "KeyD"){
             
             updateBoardAfterShiftRight()
             addNumToGrid()
-            // soundEffect()
         }
         else if(evt.code == "ArrowUp" || evt.code == "KeyW"){
             
             updateBoardAfterShiftUp()
             addNumToGrid()
-            // soundEffect()
         }
         else if(evt.code == "ArrowDown" || evt.code == "KeyS"){
             
             updateBoardAfterShiftDown()
             addNumToGrid()
-            // soundEffect()
         }
         soundEffect()
     }else{
@@ -84,7 +81,7 @@ document.addEventListener('keyup', (evt) => {
 //generate randome Integer in order to choose index 
 initAudioPlayer()
 
-//check for win if grid number = 2048
+
 function runQuickWin(){
     score = 0
     isContinue = false 
@@ -106,6 +103,8 @@ function runQuickWin(){
         }
     }
 }
+
+//
 function runQuickLose(){
     score = 0
     isContinue = false 
@@ -128,6 +127,7 @@ function runQuickLose(){
     }
 }
 
+//check for win if grid number = 2048
 function checkForWin(num){
     if(num == 2048){
         //continue game after win
@@ -227,17 +227,12 @@ function init(){
     availableGrinInCol = true
     gameOver = false
     document.querySelector(".score").textContent = score;
-    // board = [
-    //     [4, 0 , 2, 2],
-    //     [2, 2, 2, 2],
-    //     [2, 2, 2, 2],
-    //     [2, 2, 2048, 0]
-    // ]
+ 
     board = [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-        [, 0, 0, 0]
+        [0, 0, 0, 0]
     ]
     
     //iteral the board to update the grid data 
@@ -281,7 +276,7 @@ function removeZero(row){
     return row.filter(num => num != 0)
 }
 
-//shift evry row
+//shift every row
 function shift(row){
     //remove 0 before shift
     row = removeZero(row)
