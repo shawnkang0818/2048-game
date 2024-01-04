@@ -67,9 +67,6 @@ document.addEventListener('keyup', (evt) => {
 //setup board, add all initiate value to each grid
 //generate randome Integer in order to choose index 
 initAudioPlayer()
-// window.onload = function(){
-//     init();
-// }
 
 // check for lose, if so , update web page
 function checkForLose(){
@@ -118,10 +115,7 @@ function availableRow(){
             return true
         }
     }
-    
-    
     return false
-    
 }
 
 
@@ -136,7 +130,6 @@ function render(){
         coverScreen.classList.add('hide')
         restartBtn.textContent = "Restart" 
     })
-
 }
 
 function init(){
@@ -155,7 +148,7 @@ function init(){
         [0, 4096, 0, 0],
         [0, 0, 2048, 0],
         [0, 0, 0, 0],
-        [0, 0, 0, 0]
+        [8192, 0, 0, 0]
     ]
     
     //iteral the board to update the grid data 
@@ -191,12 +184,12 @@ function updateGridStyle(grid, num){
             grid.classList.add("num8192")
         }
     }
+    checkForWin()
 }
 
 //remove the index of a row where hold 0.   Ex: [0, 2, 0, 2] - > [2,2]
 function removeZero(row){
     return row.filter(num => num != 0)
-    
 }
 
 //shift evry row
@@ -244,10 +237,9 @@ function updateBoardAfterShiftLeft(){
             let num = board[i][j]
             updateGridStyle(grid, num)
         }
-
     }
 }
-//shit right 
+//shift right 
 function updateBoardAfterShiftRight(){
     for(let i=0; i<rows; i++ ){
         let row = board[i]
@@ -266,7 +258,7 @@ function updateBoardAfterShiftRight(){
     }
 }
 
-//shit up
+//shift up
 function updateBoardAfterShiftUp() {
     for(let j = 0; j < colmns; j++){
         //[[2],[0],[2],[2]] -> [[2,0,2,2],[],[],[]]
@@ -276,7 +268,8 @@ function updateBoardAfterShiftUp() {
             board[2][j],
             board[3][j]]
         row = shift(row)
-
+        
+        //update board
         for(let i = 0; i < rows; i++){
             board[i][j] = row[i]
             let num = board[i][j]
