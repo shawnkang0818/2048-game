@@ -10,6 +10,8 @@ let rows = 4
 let colmns = 4
 let idx = 0
 let colToRow =[]
+let availableGridInRow
+let availableGrinInCol
 //audio
 let playBtn, muteBtn, shiftSound
 
