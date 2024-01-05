@@ -203,14 +203,16 @@ function availableRow(){
 //run Game
 render()
 function render(){
-   restartBtn.textContent = "Start Game" 
-   message.textContent = "Press W, A, S, D to Move"
-   message.classList.remove('hide')
-   restartBtn.addEventListener('click', () =>{
+    restartBtn.textContent = "Start Game" 
+    message.textContent = "Press W, A, S, D to Move"
+    message.classList.remove('hide')
+    restartBtn.addEventListener('click', () =>{
         if(quickWin){
             runQuickWin()
+            quickWin = false
         }else if(quickLose){
             runQuickLose()
+            quickLose = false
         }
         else{
             init()
@@ -219,7 +221,7 @@ function render(){
         restartBtn.textContent = "Restart" 
     })
 }
-
+//initialize
 function init(){
     score = 0
     isContinue = false 
