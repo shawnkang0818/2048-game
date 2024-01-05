@@ -256,12 +256,9 @@ function init(){
         }
     }
     
-    
     //create 2 to begin the game
-
     addNumToGrid()
     addNumToGrid()
-
 }
 //remove grid classlist vlaue to disable animation
 function removeAnimationClassList(){

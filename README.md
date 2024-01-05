@@ -1,5 +1,5 @@
 # \\\\- 2048 -// 
-![Alt text](img/game-img.jpg)
+![Alt text](img/game-img.jpg)  
 2048 is played on a simple 4×4 grid, with numbered tiles sliding as the player uses the four arrow keys to move them. When the game starts, there are already two tiles with a value of 2 in the grid, and after each turn, another such tile will appear in a random empty space. The block slides as far as possible in the selected direction until stopped by another block or a grid edge. If two blocks with the same number collide while moving, they will merge into one block whose value is the sum of the two colliding blocks.
 
 ### win (condition): reach to 2048
@@ -27,8 +27,8 @@ ___
 *   check out the [Attributions.](https://github.com/shawnkang0818/unit-1-2048-game/blob/main/attributions.md)
 
 
-##  Features
-<input type="checkbox"  disabled  checked/> Add win & lose game hack to win/lose quick 
+##  Ice box
+<input type="checkbox"  disabled  checked/> Add win & lose game hack to win/lose quick   
 <input type="checkbox"  disabled  checked /> Sound  
 <input type="checkbox"  disabled  checked /> Background Music  
 <input type="checkbox"  disabled  checked/> Add continue game feature, it could continue play after win   
