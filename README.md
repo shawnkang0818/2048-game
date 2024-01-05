@@ -4,10 +4,10 @@
 
 ### win (condition): reach to 2048
 *quick win game hack:   
->console -> quickWin = true -> click on red button
+>reload web page ->console -> quickWin = true -> click on Start Game button
 ### *lose (condition): no available move
 *quick lose game hack:   
->console -> quickLose = true -> click on red button
+>reload web page ->console -> quickLose = true -> click on Start Game button
 ___  
 ##  [Play the game here](https://2048zk.netlify.app/)
 ## [Project Planning](https://docs.google.com/document/d/1LvECgfdCHLBqAr789mKQZNfHjHkn2xZwArxg2H0NKec/edit)
@@ -33,7 +33,6 @@ ___
 <input type="checkbox"  disabled  checked /> Background Music  
 <input type="checkbox"  disabled  checked/> Add continue game feature, it could continue play after win   
 <input type="checkbox"  disabled  /> Dark Mode  
-<input type="checkbox"  disabled  /> Move Animations  
-<input type="checkbox"  disabled  /> Grid Animations  
+<input type="checkbox"  disabled checked /> Animations  
 <input type="checkbox"  disabled  /> Confetti  
 

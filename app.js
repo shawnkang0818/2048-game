@@ -35,7 +35,7 @@ const message =document.getElementById('over-text')
 const coverScreen =document.querySelector('.cover-screen')
 const ctnBtn = document.getElementById('continue')
 const restartBtn = document.getElementById('restart')
-const gridEls = document.querySelectorAll('.grid')
+const gameBoard = document.getElementById('board')
 /*----------------------------- Event Listeners -----------------------------*/
 restartBtn.addEventListener('click', init)
 ctnBtn.addEventListener('click', () =>{
@@ -71,6 +71,8 @@ document.addEventListener('keyup', (evt) => {
     }else{
         return
     }
+    
+    
     shiftLeftAnimation = false
     shiftRightAnimation = false
     shiftUpAnimation = false
@@ -78,6 +80,7 @@ document.addEventListener('keyup', (evt) => {
     availableGridInRow=availableRow()
     availableGrinInCol=availableCol()
     document.querySelector(".score").textContent = score;
+    
 })
 
 
@@ -135,6 +138,7 @@ function runQuickLose(){
 //check for win if grid number = 2048
 function checkForWin(num){
     if(num == 2048){
+        removeAnimationClassList()
         //continue game after win
         if(!isContinue){
             victoryEffect()
@@ -156,6 +160,7 @@ function checkForWin(num){
 // check for lose, if so , update web page
 function checkForLose(){
     if(!availableRow() && !availableCol()){
+        removeAnimationClassList()
         loseEffect()
         gameOver = true
         restartBtn.textContent= "Start Again"
@@ -258,8 +263,14 @@ function init(){
     addNumToGrid()
 
 }
+//remove grid classlist vlaue to disable animation
 function removeAnimationClassList(){
-    
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < colmns; j++) {
+            let grid = document.querySelector(`#g${i}${j}`)
+            grid.classList.remove(animation())
+        }   
+    }
 }
 //handle animation of move direction
 function animation(){
@@ -292,9 +303,7 @@ function updateGridStyle(grid, num){
             grid.classList.add("num8192")
         }
     }
-    
     checkForWin(num)
-    grid.classList.remove(animation())
 }
 
 //remove the index of a row where hold 0.   Ex: [0, 2, 0, 2] - > [2,2]
