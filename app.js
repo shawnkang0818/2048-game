@@ -25,17 +25,17 @@ let playBtn, muteBtn, shiftSound
 //to enable quick win function
 let quickWin = false
 let quickLose = false
-let moveLeftAnimation = false
-let moveRightAnimation = false
-let moveUpAnimation = false
-let moveDownAnimation = false
+let shiftLeftAnimation = false
+let shiftRightAnimation = false
+let shiftUpAnimation = false
+let shiftDownAnimation = false
 let tempGrid
 /*------------------------ Cached Element References ------------------------*/
 const message =document.getElementById('over-text')
 const coverScreen =document.querySelector('.cover-screen')
 const ctnBtn = document.getElementById('continue')
 const restartBtn = document.getElementById('restart')
-
+const gridEls = document.querySelectorAll('.grid')
 /*----------------------------- Event Listeners -----------------------------*/
 restartBtn.addEventListener('click', init)
 ctnBtn.addEventListener('click', () =>{
@@ -258,6 +258,9 @@ function init(){
     addNumToGrid()
 
 }
+function removeAnimationClassList(){
+    
+}
 //handle animation of move direction
 function animation(){
     if(shiftLeftAnimation == true){
@@ -275,10 +278,9 @@ function updateGridStyle(grid, num){
     //clear the text of grid
     grid.textContent = ""
     //clear the class list of grid(clear style)
-    grid.classList.value = ""
+    grid.classList.value = "grid"
     //add classlist value back to grid
     grid.classList.add("grid")
-    
     if(num>0){
         grid.classList.add(animation())
         grid.innerText = num
@@ -290,7 +292,9 @@ function updateGridStyle(grid, num){
             grid.classList.add("num8192")
         }
     }
+    
     checkForWin(num)
+    grid.classList.remove(animation())
 }
 
 //remove the index of a row where hold 0.   Ex: [0, 2, 0, 2] - > [2,2]
