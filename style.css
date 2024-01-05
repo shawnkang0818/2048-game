@@ -29,6 +29,75 @@ h1 {
     grid-template-rows: 140px 140px 140px 140px;
     align-content: center;
 }
+@keyframes  right {
+    form{
+        transform: translateX(-300px);
+    }
+    to {
+        transform: translateX(0)
+    }
+}
+.move-right {
+    animation-name: right;
+    animation-duration: 100ms;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    transform: translateX(-20px);
+}
+
+@keyframes  left {
+    form{
+        transform: translateX(-300px);
+    }
+    to {
+        transform: translateX(0)
+    }
+}
+.move-left {
+    animation-name: left;
+    animation-duration: 100ms;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    transform: translateX(20px);
+}
+@keyframes  up {
+    form{
+        transform: translateY(-300px);
+    }
+    to {
+        transform: translateY(0)
+    }
+}
+.move-up {
+    animation-name: up;
+    animation-duration: 100ms;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    transform: translateY(20px);
+}
+@keyframes down {
+    form{
+        transform: translateY(-300px);
+    }
+    to {
+        transform: translateY(0)
+    }
+}
+.move-down {
+    animation-name: down;
+    animation-duration: 100ms;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    transform: translateY(-20px);
+}
 .grid {
     background-color: #c1cac8;
     border-radius: 5px;
@@ -37,8 +106,6 @@ h1 {
     align-items: center;
     font-size: 50px;
     font-weight: bold;
-    animation: gridmove 5s;
-    animation-fill-mode: forwards;
 }
 
 .cover-screen {

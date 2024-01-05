@@ -25,14 +25,17 @@ let playBtn, muteBtn, shiftSound
 //to enable quick win function
 let quickWin = false
 let quickLose = false
-
-
+let moveLeftAnimation = false
+let moveRightAnimation = false
+let moveUpAnimation = false
+let moveDownAnimation = false
+let tempGrid
 /*------------------------ Cached Element References ------------------------*/
 const message =document.getElementById('over-text')
 const coverScreen =document.querySelector('.cover-screen')
 const ctnBtn = document.getElementById('continue')
-
 const restartBtn = document.getElementById('restart')
+
 /*----------------------------- Event Listeners -----------------------------*/
 restartBtn.addEventListener('click', init)
 ctnBtn.addEventListener('click', () =>{
@@ -45,22 +48,22 @@ ctnBtn.addEventListener('click', () =>{
 document.addEventListener('keyup', (evt) => {
     if(!gameOver){
         if(evt.code == "ArrowLeft" || evt.code == "KeyA"){
-            
+            shiftLeftAnimation = true
             updateBoardAfterShiftLeft()
             addNumToGrid()
         }
         else if(evt.code == "ArrowRight" || evt.code == "KeyD"){
-            
+            shiftRightAnimation = true
             updateBoardAfterShiftRight()
             addNumToGrid()
         }
         else if(evt.code == "ArrowUp" || evt.code == "KeyW"){
-            
+            shiftUpAnimation = true
             updateBoardAfterShiftUp()
             addNumToGrid()
         }
         else if(evt.code == "ArrowDown" || evt.code == "KeyS"){
-            
+            shiftDownAnimation =true
             updateBoardAfterShiftDown()
             addNumToGrid()
         }
@@ -68,8 +71,10 @@ document.addEventListener('keyup', (evt) => {
     }else{
         return
     }
-    
-    
+    shiftLeftAnimation = false
+    shiftRightAnimation = false
+    shiftUpAnimation = false
+    shiftDownAnimation = false
     availableGridInRow=availableRow()
     availableGrinInCol=availableCol()
     document.querySelector(".score").textContent = score;
@@ -253,16 +258,31 @@ function init(){
     addNumToGrid()
 
 }
+//handle animation of move direction
+function animation(){
+    if(shiftLeftAnimation == true){
+        return 'move-left'
+    }else if(shiftRightAnimation == true){
+        return 'move-right'
+    }else if(shiftUpAnimation == true){
+        return 'move-up'
+    }else if(shiftDownAnimation == true){
+        return 'move-down'
+    }
+}
 
 function updateGridStyle(grid, num){
-    //clear the value of grid
+    //clear the text of grid
     grid.textContent = ""
     //clear the class list of grid(clear style)
     grid.classList.value = ""
-    //add grid back
+    //add classlist value back to grid
     grid.classList.add("grid")
+    
     if(num>0){
+        grid.classList.add(animation())
         grid.innerText = num
+        
         if(num<=4096){
             grid.classList.add(`num${num.toString()}`)
         }
@@ -285,7 +305,7 @@ function shift(row){
     
     for(let i = 0; i<row.length-1; i++){
         //if the value in current index 
-        //is the same as the next one plus them
+        //if it is the same as next one plus them
         //[2,2,2] -> [4,0,2]
         if(row[i] == row[i+1]){
             row[i] += row[i]
@@ -309,15 +329,14 @@ function shift(row){
 //shift left
 function updateBoardAfterShiftLeft(){
     for(let i=0; i<rows; i++ ){
-        //a temporary array to hold current values 
-        //in a row before shift
+        // a temp array to hold a row [2,0,2,2]
         let row = board[i]
-        //get value after shifted a row 
+        //return a undated row [4,2,0,0]
         row = shift(row)
-        //push the value back to the board row
+        //undate the board row
         board[i] = row
 
-        //update board 
+        //handle update each grid
         for(let j = 0; j<4; j++){
             let grid = document.querySelector(`#g${i}${j}`)
             let num = board[i][j]
@@ -339,6 +358,7 @@ function updateBoardAfterShiftRight(){
         for(let j = 0; j<4; j++){
             let grid = document.querySelector(`#g${i}${j}`)
             let num = board[i][j]
+            
             updateGridStyle(grid, num)
         }
     }
@@ -347,6 +367,7 @@ function updateBoardAfterShiftRight(){
 //shift up
 function updateBoardAfterShiftUp() {
     for(let j = 0; j < colmns; j++){
+        //convert column to row
         //[[2],[0],[2],[2]] -> [[2,0,2,2],[],[],[]]
         let row = [
             board[0][j],
@@ -411,12 +432,14 @@ function addNumToGrid(){
                 let grid = document.querySelector(`#g${row}${colmn}`)
                 grid.textContent = "2"
                 grid.classList.add("num2")
+                //grid.classList.add("move-left")
                 hasNum = true
             }
         }
     }
+    //if there is no empty grid then check possible move
     else if(!hasEmptygrid()) {
-        
+        //if either row or column have possible move then keep playing
         if(availableGridInRow === true || availableGrinInCol === true){
             return
         }
@@ -436,6 +459,8 @@ function soundEffect(){
         shiftSound.play()
     }
 }
+
+//victory sound effect
 function victoryEffect(){
     victory = new Audio()
     victory.src = "sound/victory.mp3"
@@ -444,6 +469,7 @@ function victoryEffect(){
         victory.play()
     }
 }
+//lose sound effect
 function loseEffect(){
     lose = new Audio()
     lose.src = "sound/lose.mp3"
@@ -452,6 +478,7 @@ function loseEffect(){
         lose.play()
     }
 }
+// handle background music
 function initAudioPlayer(){
     audio.volume = 0.2
     audio.src = "sound/backgroundmusic.mp3"
@@ -466,6 +493,7 @@ function initAudioPlayer(){
     playBtn.addEventListener('click', playPause)
     muteBtn.addEventListener('click', mute)
 }
+// handle play or pause button
 function playPause(){
     if(audio.paused){
         audio.play()
@@ -476,6 +504,7 @@ function playPause(){
         playBtn.style.background = "url(img/play.svg) no-repeat"
     }
 }
+//handle mute or not
 function mute(){
     if(audio.muted){
         audio.muted = false 
