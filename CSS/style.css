@@ -134,7 +134,7 @@ button#playPauseBtn {
     outline: none;
     margin: 10px;
     display: inline-block;
-    background: url(img/play.svg) no-repeat;
+    background: url(../img/play.svg) no-repeat;
     border: none;
     width: 30px;
     height: 30px;
@@ -145,7 +145,7 @@ button#muteBtn {
     outline: none;
     margin: 10px;
     display: inline-block;
-    background: url(img/mute.svg) no-repeat;
+    background: url(../img/mute.svg) no-repeat;
     border: none;
     width: 30px;
     height: 30px;
