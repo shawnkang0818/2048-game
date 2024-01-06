@@ -85,7 +85,7 @@ h1 {
 }
 @keyframes down {
     form{
-        transform: translateY(-300px);
+        transform: translateY(300px);
     }
     to {
         transform: translateY(0)
